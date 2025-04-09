@@ -1,0 +1,555 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 21-02-2025 a las 20:50:44
+-- Versión del servidor: 8.0.39-30
+-- Versión de PHP: 7.4.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `glowmanager`
+--
+CREATE DATABASE IF NOT EXISTS `glowmanager` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `glowmanager`;
+
+CREATE TABLE `salons` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `webPage` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tiktok` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logoFile` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rfc` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `start` time DEFAULT NULL,
+  `end` time DEFAULT NULL,
+  `simulador` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `users` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','employee','estilista','recepcionista') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin',
+  `salon_id` bigint UNSIGNED NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `citas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `start` datetime DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `generated_points` decimal(10,2) DEFAULT NULL,
+  `status` enum('Agendada','Cancelada','Pagada','Confirmada','Pendiente') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Agendada',
+  `customer_id` bigint UNSIGNED DEFAULT NULL,
+  `salon_id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `disccount` decimal(10,2) NOT NULL,
+  `remember` tinyint(1) NOT NULL,
+  `motivoCancelacion` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `end_real` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `clientes` (
+  `id` bigint UNSIGNED NOT NULL,
+  `first_name` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `email` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `want_custom_messages` tinyint(1) DEFAULT '0',
+  `want_offers` tinyint(1) DEFAULT '0',
+  `is_active` tinyint(1) DEFAULT '1',
+  `platform_id` int DEFAULT NULL,
+  `categoria_cliente_id` bigint UNSIGNED DEFAULT NULL,
+  `sexo` enum('masculino','femenino','noBinario') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `salon_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `form_answered` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `categoria_clientes` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `salon_id` bigint UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `categoria_clientes_pivs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `categoria_cliente_id` bigint UNSIGNED NOT NULL,
+  `cliente_id` bigint UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `empleados` (
+  `id` bigint UNSIGNED NOT NULL,
+  `first_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  `visible` tinyint(1) DEFAULT '1',
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `salon_id` bigint UNSIGNED NOT NULL DEFAULT '0',
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `servicios` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `iva` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gross_price` decimal(10,2) NOT NULL,
+  `disccount_price` decimal(10,2) DEFAULT NULL,
+  `reward_points` decimal(10,2) DEFAULT NULL,
+  `duration` int NOT NULL DEFAULT '15',
+  `salon_id` bigint UNSIGNED NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `asignacion_servicios` (
+  `id` bigint UNSIGNED NOT NULL,
+  `selected_service` bigint UNSIGNED NOT NULL,
+  `cita_id` bigint UNSIGNED NOT NULL,
+  `empleado_id` bigint UNSIGNED NOT NULL,
+  `discount_qty` decimal(10,2) DEFAULT NULL,
+  `discount_type` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Porcentaje',
+  `generated_points` decimal(10,2) DEFAULT NULL,
+  `current_price` decimal(10,2) NOT NULL,
+  `disccount_price` decimal(10,2) DEFAULT NULL,
+  `comission` decimal(10,2) DEFAULT NULL,
+  `iva` enum('0.16','0.08','0') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start` datetime DEFAULT NULL,
+  `selected` tinyint(1) NOT NULL DEFAULT '1',
+  `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#E2BBB4',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `duration` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `etiquetas_citas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `salon_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `etiquetas_citas_pivs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `etiquetas_cita_id` bigint UNSIGNED NOT NULL,
+  `cita_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `logs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `out` binary(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+--
+-- Indices de la tabla `asignacion_servicios`
+--
+ALTER TABLE `asignacion_servicios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `asignacion_servicios_selected_service_foreign` (`selected_service`),
+  ADD KEY `asignacion_servicios_cita_id_foreign` (`cita_id`),
+  ADD KEY `asignacion_servicios_empleado_id_foreign` (`empleado_id`);
+
+
+--
+-- Indices de la tabla `categoria_clientes`
+--
+ALTER TABLE `categoria_clientes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoria_clientes_salon_id` (`salon_id`) USING BTREE;
+
+--
+-- Indices de la tabla `categoria_clientes_pivs`
+--
+ALTER TABLE `categoria_clientes_pivs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoria_clientes_pivs_categoria_cliente_id_foreign` (`categoria_cliente_id`),
+  ADD KEY `categoria_clientes_pivs_cliente_id_foreign` (`cliente_id`);
+
+--
+
+--
+-- Indices de la tabla `citas`
+--
+ALTER TABLE `citas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `citas_customer_id_foreign` (`customer_id`),
+  ADD KEY `citas_salon_id_foreign` (`salon_id`),
+  ADD KEY `citas_user_id_foreign` (`user_id`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clientes_categoria_cliente_id_foreign` (`categoria_cliente_id`),
+  ADD KEY `clientes_salon_id_foreign` (`salon_id`);
+
+--
+
+-- Indices de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `empleados_email_unique` (`email`),
+  ADD UNIQUE KEY `empleados_phone_number_unique` (`phone_number`),
+  ADD UNIQUE KEY `empleados_user_id_unique` (`user_id`),
+  ADD KEY `empleados_salon_id_foreign` (`salon_id`);
+
+
+-- Indices de la tabla `etiquetas_citas`
+--
+ALTER TABLE `etiquetas_citas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `etiquetas_citas_salon_id_foreign` (`salon_id`);
+
+--
+-- Indices de la tabla `etiquetas_citas_pivs`
+--
+ALTER TABLE `etiquetas_citas_pivs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `etiquetas_citas_pivs_etiquetas_cita_id_foreign` (`etiquetas_cita_id`),
+  ADD KEY `etiquetas_citas_pivs_cita_id_foreign` (`cita_id`);
+
+
+-- Indices de la tabla `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `logs_user_id_foreign` (`user_id`);
+
+--
+
+ALTER TABLE `salons`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `salons_email_unique` (`email`),
+  ADD UNIQUE KEY `salons_phone_unique` (`phone`);
+
+
+ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `servicios_salon_id_foreign` (`salon_id`);
+
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_salon_id_foreign` (`salon_id`);
+
+--
+-- AUTO_INCREMENT de la tabla `asignacion_servicios`
+--
+ALTER TABLE `asignacion_servicios`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2863;
+
+
+ALTER TABLE `categoria_clientes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria_clientes_pivs`
+--
+ALTER TABLE `categoria_clientes_pivs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=620;
+
+
+ALTER TABLE `citas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1557;
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4753;
+
+--
+
+ALTER TABLE `empleados`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+
+ALTER TABLE `etiquetas_citas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `etiquetas_citas_pivs`
+--
+ALTER TABLE `etiquetas_citas_pivs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+
+ALTER TABLE `logs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=972;
+
+
+ALTER TABLE `salons`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+
+ALTER TABLE `servicios`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
+
+--
+
+ALTER TABLE `users`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+ALTER TABLE `asignacion_servicios`
+  ADD CONSTRAINT `asignacion_servicios_cita_id_foreign` FOREIGN KEY (`cita_id`) REFERENCES `citas` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `asignacion_servicios_empleado_id_foreign` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `asignacion_servicios_selected_service_foreign` FOREIGN KEY (`selected_service`) REFERENCES `servicios` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+-- Filtros para la tabla `categoria_clientes`
+--
+ALTER TABLE `categoria_clientes`
+  ADD CONSTRAINT `categoria_clientes_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`);
+
+--
+-- Filtros para la tabla `categoria_clientes_pivs`
+--
+ALTER TABLE `categoria_clientes_pivs`
+  ADD CONSTRAINT `categoria_clientes_pivs_categoria_cliente_id_foreign` FOREIGN KEY (`categoria_cliente_id`) REFERENCES `categoria_clientes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `categoria_clientes_pivs_cliente_id_foreign` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `citas`
+  ADD CONSTRAINT `citas_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `clientes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `citas_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `citas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `clientes_categoria_cliente_id_foreign` FOREIGN KEY (`categoria_cliente_id`) REFERENCES `categoria_clientes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `clientes_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `empleados`
+  ADD CONSTRAINT `empleados_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `empleados_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- Filtros para la tabla `etiquetas_citas`
+--
+ALTER TABLE `etiquetas_citas`
+  ADD CONSTRAINT `etiquetas_citas_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`);
+
+--
+-- Filtros para la tabla `etiquetas_citas_pivs`
+--
+ALTER TABLE `etiquetas_citas_pivs`
+  ADD CONSTRAINT `etiquetas_citas_pivs_cita_id_foreign` FOREIGN KEY (`cita_id`) REFERENCES `citas` (`id`),
+  ADD CONSTRAINT `etiquetas_citas_pivs_etiquetas_cita_id_foreign` FOREIGN KEY (`etiquetas_cita_id`) REFERENCES `etiquetas_citas` (`id`);
+
+--
+ALTER TABLE `logs`
+  ADD CONSTRAINT `logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `servicios`
+  ADD CONSTRAINT `servicios_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_salon_id_foreign` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- Volcando datos para la tabla glowmanager.salons: ~7 rows (aproximadamente)
+INSERT INTO `salons` (`id`, `name`, `email`, `webPage`, `facebook`, `instagram`, `youtube`, `tiktok`, `phone`, `logoFile`, `rfc`, `start`, `end`, `created_at`, `updated_at`, `deleted_at`) 
+VALUES (5, 'Testing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '09:00:00', '19:00:00', '2024-11-12 23:36:55', '2025-01-30 06:41:39', NULL);
+
+
+-- Volcando datos para la tabla glowmanager.users: ~16 rows (aproximadamente)
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `salon_id`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(8, 'Admin', 'prueba@test.com', NULL, '$2y$10$Wb8Ckz50Pe1suHOhnW1QD.GSXC6K565eqyhyCBDUJm7.v7aImfu/6', 'admin', 5, NULL, '2024-11-12 23:36:55', '2025-04-03 04:26:17', NULL);
+
+
+-- Volcando datos para la tabla glowmanager.clientes: ~2,583 rows (aproximadamente)
+INSERT INTO `clientes` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `description`, `phone`, `want_custom_messages`, `want_offers`, `is_active`, `platform_id`, `sexo`, `postcode`, `salon_id`, `created_at`, `updated_at`, `deleted_at`, `form_answered`) VALUES
+	(1, 'Daniela', 'Cuevas Cheew', '1985-03-11', NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2021-10-02 20:38:05', NULL, NULL, 1),
+	(2, 'Hilda', 'Marin', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2021-05-05 19:46:20', NULL, NULL, 0),
+	(3, 'Natalia', 'Masciarelli', '1992-07-31', NULL, NULL, NULL, 1, 0, 1, NULL, 'femenino', NULL, 5, '2023-03-29 19:43:38', NULL, NULL, 1),
+	(4, 'tania', 'muñoz', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2021-07-20 15:00:32', NULL, NULL, 0),
+	(5, 'Daniela', 'Kennedi', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2022-06-09 18:18:01', NULL, NULL, 0),
+	(6, 'Viviana', 'Hermosillo', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2022-06-10 00:36:10', NULL, NULL, 0),
+	(7, 'Marisol', 'Mendoza Perez', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2022-06-09 23:07:17', NULL, NULL, 0),
+	(8, 'Paola', 'Espinoza', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2022-06-10 00:37:11', NULL, NULL, 0),
+	(9, 'Maria', 'Del Rosario', NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 'femenino', NULL, 5, '2021-05-11 17:58:17', NULL, NULL, 0);
+
+
+-- Volcando datos para la tabla glowmanager.servicios: ~303 rows (aproximadamente)
+INSERT INTO `servicios` (`id`, `name`, `iva`, `description`, `gross_price`, `disccount_price`, `reward_points`, `duration`, `salon_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+	(178, 'Maquillaje Social ', '0.16', '', 900.00, 0.00, 315.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(179, 'Medio recogido 400', '0.16', '', 400.00, 0.00, 140.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(180, 'Retoque de brillo en gel', '0.16', '', 53.00, 0.00, 18.55, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(181, 'Tratam. Redken high bright p/ rubios', '0.16', '', 500.00, 0.00, 175.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(182, 'Tratamiento Antifrizz Bizenza', '0.16', '', 2200.00, 0.00, 770.00, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(183, 'Tratamiento kerastase Therapiste', '0.16', '', 930.00, 0.00, 325.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(184, 'Tratamiento kerastase con plancha', '0.16', '', 1200.00, 0.00, 420.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(186, 'peinado con ferro 2', '0.16', '', 460.00, 0.00, 161.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(187, 'peinado medio recogido', '0.16', '', 500.00, 0.00, 175.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(188, 'peinado moldeado', '0.16', '', 230.00, 0.00, 80.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(189, 'peinado ondulado ', '0.16', '', 230.00, 0.00, 80.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(190, 'peinado weetlook', '0.16', '', 350.00, 0.00, 122.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(191, 'tinte redken color fusion', '0.16', '', 630.00, 0.00, 220.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(192, 'tratamiento loreal detox', '0.16', '', 440.00, 0.00, 154.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(193, 'Ampolleta  Nioxin', '0.16', '', 850.00, 0.00, 297.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(194, 'Ampolleta - Ablandador de canas', '0.16', '', 80.00, 0.00, 28.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(195, 'Ampolleta - Loción a la médula', '0.16', '', 500.00, 0.00, 175.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(196, 'Ampolleta - semi de lino aceite esencial', '0.16', '', 500.00, 0.00, 175.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(197, 'Ampolleta - semi de lino reestructurante', '0.16', '', 500.00, 0.00, 175.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(198, 'Ampolleta Genesis -Rosa Patel ', '0.16', '', 580.00, 0.00, 203.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(200, 'Ampolleta Kerastase gris', '0.16', '', 580.00, 0.00, 203.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(201, 'Ampolleta Kerastase naranja', '0.16', '', 580.00, 0.00, 203.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(202, 'Ampolleta Kerastase rosa', '0.16', '', 580.00, 0.00, 203.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(203, 'Ampolleta Kerastase verde', '0.16', '', 580.00, 0.00, 203.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(204, 'Aplicacion tinte/sin producto', '0.16', '', 250.00, 0.00, 87.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(205, 'Chongo', '0.16', '', 580.00, 0.00, 203.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(206, 'Coleta', '0.16', '', 580.00, 0.00, 203.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(207, 'Corte de dama', '0.16', '', 500.00, 0.00, 175.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(209, 'Corte de niña', '0.16', '', 250.00, 0.00, 87.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(212, 'DECOLORACION GLOBAL RAIZ', '0.16', '', 1850.00, 0.00, 647.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(213, 'Despunte', '0.16', '', 300.00, 0.00, 105.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(214, 'Extensiones de tape 20" (pulgadas)', '0.16', '', 800.00, 0.00, 280.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(215, 'Extensiones de tape 24 " (pulgadas)', '0.16', '', 800.00, 0.00, 280.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(216, 'Luces nuevas ', '0.16', '', 1950.00, 0.00, 682.50, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(217, 'Luces nuevas 1 1/2 cabeza', '0.16', '', 2950.00, 0.00, 1032.50, 120, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(218, 'Luces nuevas 2 cabezas', '0.16', '', 3900.00, 0.00, 1365.00, 120, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(221, 'Maquillaje novia', '0.16', '', 2750.00, 0.00, 962.50, 150, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(226, 'Matiz Loreal', '0.16', '', 600.00, 0.00, 210.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(227, 'Matiz Redken', '0.16', '', 700.00, 0.00, 245.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(230, 'Peinado novia', '0.16', '', 2640.00, 0.00, 924.00, 150, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(231, 'Prueba de peinado', '0.16', '', 960.00, 0.00, 336.00, 150, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(232, 'Retiro extensiones tape', '0.16', '', 6.25, 0.00, 2.19, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(233, 'Retoque de Luces (baby lights)', '0.16', '', 1950.00, 0.00, 682.50, 120, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(234, 'Retoque de cana localizada Loreal', '0.16', '', 130.00, 0.00, 45.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(235, 'Retoque de cana localizada Redken', '0.16', '', 140.00, 0.00, 49.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(236, 'Retoque de luces (hight lights)', '0.16', '', 1800.00, 0.00, 630.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(238, 'Retoque de tinte Inoa', '0.16', '', 700.00, 0.00, 245.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(239, 'Retoque de tinte Loreal', '0.16', '', 600.00, 0.00, 210.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(240, 'Retoque de tinte Redken', '0.16', '', 700.00, 0.00, 245.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(242, 'TINTE SHADE GLOSS REDKEN', '0.16', '', 700.00, 0.00, 245.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(243, 'Tratamiento  davines Oi + Luster ', '0.16', '', 640.00, 0.00, 224.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(244, 'Tratamiento Brazilian anti frizz 1 melena corta', '0.16', 'Maximo de largo 5cm abajo el hombro', 2250.00, 0.00, 787.50, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(245, 'Tratamiento Brazilian anti frizz 2 melena mediana', '0.16', 'Melena Mediana a partir de 8cm bajo el hombro a 27cm', 2550.00, 0.00, 892.50, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(246, 'Tratamiento Brazilian anti frizz 3  melena Larga', '0.16', 'Melena Larga aprox 28cm a partir del hombro', 2750.00, 0.00, 962.50, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(247, 'Tratamiento Brazilian anti frizz 4 melena extra larga ', '0.16', 'A partir del hombro 30cm en adelante', 2950.00, 0.00, 1032.50, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(248, 'Tratamiento Brazilian anti frizz contornos', '0.16', 'Solo raiz, aprox 6cm', 640.00, 0.00, 224.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(249, 'Tratamiento Davines Nourishing', '0.16', '', 880.00, 0.00, 308.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(250, 'Tratamiento Davines con sobre', '0.16', 'Incluye sobre', 640.00, 0.00, 224.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(251, 'Tratamiento Davines sobre ', '0.16', '', 350.00, 0.00, 122.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(252, 'Tratamiento Loreal pro longer', '0.16', '', 460.00, 0.00, 161.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(253, 'Tratamiento Redken Acidic', '0.16', '', 650.00, 0.00, 227.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(254, 'Tratamiento Redken bleach recovery', '0.16', '', 500.00, 0.00, 175.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(255, 'Tratamiento brazilian anti frizz raices ', '0.16', '', 1300.00, 0.00, 455.00, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(256, 'Tratamiento curl expression L?oreal', '0.16', '', 550.00, 0.00, 192.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(257, 'Tratamiento davines Arcilla Spa', '0.16', '', 1050.00, 0.00, 367.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(258, 'Tratamiento davines heart of glass', '0.16', '', 700.00, 0.00, 245.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(259, 'Tratamiento kerastase Brillo Lumiere ', '0.16', '', 850.00, 0.00, 297.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(260, 'Tratamiento kerastase Color Chroma', '0.16', '', 850.00, 0.00, 297.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(261, 'Tratamiento kerastase Fuerza Architecte', '0.16', '', 850.00, 0.00, 297.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(262, 'Tratamiento kerastase nutritive naranja', '0.16', '', 850.00, 0.00, 297.50, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(263, 'Wafleado melena corta', '0.16', '', 300.00, 0.00, 105.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(264, 'Wafleado melena larga', '0.16', '', 400.00, 0.00, 140.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(265, 'Ampolleta kerastase morada', '0.16', '', 580.00, 0.00, 203.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(279, 'retoque tinte davines', '0.16', '', 700.00, 0.00, 245.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(280, 'sobre de Efasol', '0.16', '', 340.00, 0.00, 119.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(282, 'tinte redken cover fusion', '0.16', '', 630.00, 0.00, 220.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(283, 'tratamiento antigrasa rebalancing davines', '0.16', '', 600.00, 0.00, 210.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(284, 'tratamiento brazilian anti frizz fleco ', '0.16', 'Solo fleco corto de raiz a punta', 640.00, 0.00, 224.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(285, 'tratamiento brillo kerastase k-water', '0.16', '', 400.00, 0.00, 140.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(286, 'tratamiento loreal  vitamino color', '0.16', '', 460.00, 0.00, 161.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(287, 'tratamiento love davines', '0.16', '', 530.00, 0.00, 185.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(288, 'tratamiento replumping davines', '0.16', '', 880.00, 0.00, 308.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(349, 'Ampolleta doble', '0.16', NULL, 430.00, NULL, NULL, 30, 5, NULL, '2025-01-15 01:20:33', '2025-01-15 01:20:33'),
+	(350, 'Ampolleta sencilla', '0.16', NULL, 330.00, NULL, NULL, 30, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44');
+
+
+-- Volcando datos para la tabla glowmanager.etiquetas_citas: ~4 rows (aproximadamente)
+INSERT INTO `etiquetas_citas` (`id`, `name`, `color`, `salon_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'Primer cita', '#278d46', 5, '2025-02-13 21:06:21', '2025-02-18 22:20:09', NULL),
+	(2, 'Cumpleaños', '#e83e8c', 5, '2025-02-18 22:23:42', '2025-02-18 22:23:42', NULL),
+	(3, 'TENTATIVA', '#FFAB2D', 2, '2025-02-13 07:05:02', '2025-02-13 07:05:07', NULL);
+
+
+-- Volcando datos para la tabla glowmanager.empleados: ~30 rows (aproximadamente)
+INSERT INTO `empleados` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `birth_date`, `is_active`, `visible`, `user_id`, `salon_id`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
+	(18, 'Norma', '', NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2024-11-13 06:04:11', '2025-03-26 05:40:12'),
+	(19, 'Brenda', '', NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2024-11-13 06:04:31', '2024-12-19 16:39:31'),
+	(20, 'Susana', '', NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2024-11-13 06:05:09', '2025-04-08 20:01:53'),
+	(21, 'Andrea', NULL, NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2024-11-13 06:05:20', '2025-04-08 20:01:52'),
+	(22, 'Isabel', NULL, NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2024-11-13 06:05:25', '2025-04-08 20:01:52'),
+	(24, 'Sheyla', NULL, NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2020-02-05 17:57:51', '2025-04-08 20:01:50'),
+	(25, 'Ashley', NULL, NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2020-02-06 23:08:32', '2025-04-08 20:01:50'),
+	(26, 'Noreli', NULL, NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2020-02-08 17:10:08', '2025-04-08 20:01:49'),
+	(27, 'Manicure', NULL, NULL, NULL, NULL, 1, 1, NULL, 5, NULL, NULL, '2020-02-11 17:56:49', '2025-04-08 20:01:48'),
+	(28, 'SALON', NULL, NULL, NULL, NULL, 0, 1, NULL, 5, NULL, NULL, '2025-01-19 16:43:11', '2025-04-03 18:00:03');
+
+ALTER TABLE `citas`
+	CHANGE COLUMN `user_id` `user_id` BIGINT(20) UNSIGNED NULL AFTER `salon_id`;

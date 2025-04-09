@@ -1,0 +1,90 @@
+[25-Oct-2024 21:29:59 UTC] PHP Fatal error:  Trait "App\Traits\ProductTrait" not found in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Productos.php on line 19
+[25-Oct-2024 21:30:30 UTC] PHP Fatal error:  Trait "App\Traits\ProductTrait" not found in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Productos.php on line 19
+[25-Oct-2024 17:51:15 CST6CDT] PHP Fatal error:  Uncaught Error: Class "ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f" not found in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php:12
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require()
+#1 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php on line 12
+[25-Oct-2024 17:51:20 CST6CDT] PHP Fatal error:  Uncaught Error: Class "ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f" not found in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php:12
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require()
+#1 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php on line 12
+[25-Oct-2024 17:52:02 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:52:03 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:52:10 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:52:11 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:52:11 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:52:12 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:52:13 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:53:41 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[25-Oct-2024 17:53:42 CST6CDT] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/../symfony/polyfill-php72/bootstrap.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php:55
+Stack trace:
+#0 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php(38): composerRequire4780c33490b7f6b712a120012efb4a3f('25072dd6e247008...', '/home/customer/...')
+#1 /home/customer/www/test.agenda-master.com.mx/public_html/vendor/autoload.php(12): ComposerAutoloaderInit4780c33490b7f6b712a120012efb4a3f::getLoader()
+#2 /home/customer/www/test.agenda-master.com.mx/public_html/public/index.php(34): require('/home/customer/...')
+#3 {main}
+  thrown in /home/customer/www/test.agenda-master.com.mx/public_html/vendor/composer/autoload_real.php on line 55
+[28-Oct-2024 20:55:29 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2733
+[28-Oct-2024 21:09:58 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2734
+[30-Oct-2024 07:25:40 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2734
+[30-Oct-2024 18:04:50 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2751
+[02-Nov-2024 13:02:41 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Calendar.php on line 1158
+[05-Nov-2024 10:04:41 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2872
+[09-Nov-2024 12:35:00 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2872
+[29-Nov-2024 14:23:58 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2872
+[29-Nov-2024 19:21:19 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 3046
+[04-Dec-2024 17:47:40 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/test.agenda-master.com.mx/public_html/app/Http/Livewire/Agenda.php on line 3072
+[06-Dec-2024 01:26:33 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/momosales.momosalon.com.mx/public_html/app/Http/Livewire/Agenda.php on line 3072
+[06-Dec-2024 16:53:25 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/momosales.momosalon.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2969
+[06-Dec-2024 16:58:52 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/momosales.momosalon.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2970
+[06-Dec-2024 16:59:36 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/momosales.momosalon.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2969
+[06-Dec-2024 17:00:14 America/Mexico_City] PHP Deprecated:  Optional parameter $duration declared before required parameter $new_end is implicitly treated as a required parameter in /home/customer/www/momosales.momosalon.com.mx/public_html/app/Http/Livewire/Agenda.php on line 2969
