@@ -47,13 +47,11 @@ class RegisteredUserController extends Controller
             'name' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'invitation_code' => ['nullable']
         ]);
 
         $salon = new Salon;
         $salon->start = "08:00:00";
         $salon->end = "17:00:00";
-        $salon->invitation_code = $request->invitation_code;
         $salon->save();
 
         $user = User::create([
