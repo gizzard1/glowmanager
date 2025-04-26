@@ -448,7 +448,7 @@ INSERT INTO `servicios` (`id`, `name`, `iva`, `description`, `gross_price`, `dis
 	(178, 'Maquillaje Social ', '0.16', '', 900.00, 0.00, 315.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(179, 'Medio recogido 400', '0.16', '', 400.00, 0.00, 140.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(180, 'Retoque de brillo en gel', '0.16', '', 53.00, 0.00, 18.55, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
-	(181, 'Tratam. Redken high bright p/ rubios', '0.16', '', 500.00, 0.00, 175.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(181, 'Hight Lights', '0.16', '', 500.00, 0.00, 175.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(182, 'Tratamiento Antifrizz Bizenza', '0.16', '', 2200.00, 0.00, 770.00, 90, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(183, 'Tratamiento kerastase Therapiste', '0.16', '', 930.00, 0.00, 325.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(184, 'Tratamiento kerastase con plancha', '0.16', '', 1200.00, 0.00, 420.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
@@ -487,7 +487,7 @@ INSERT INTO `servicios` (`id`, `name`, `iva`, `description`, `gross_price`, `dis
 	(230, 'Peinado novia', '0.16', '', 2640.00, 0.00, 924.00, 150, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(231, 'Prueba de peinado', '0.16', '', 960.00, 0.00, 336.00, 150, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(232, 'Retiro extensiones tape', '0.16', '', 6.25, 0.00, 2.19, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
-	(233, 'Retoque de Luces (baby lights)', '0.16', '', 1950.00, 0.00, 682.50, 120, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(233, 'Baby lights', '0.16', '', 1950.00, 0.00, 682.50, 120, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(234, 'Retoque de cana localizada Loreal', '0.16', '', 130.00, 0.00, 45.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(235, 'Retoque de cana localizada Redken', '0.16', '', 140.00, 0.00, 49.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(236, 'Retoque de luces (hight lights)', '0.16', '', 1800.00, 0.00, 630.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
@@ -521,14 +521,18 @@ INSERT INTO `servicios` (`id`, `name`, `iva`, `description`, `gross_price`, `dis
 	(279, 'retoque tinte davines', '0.16', '', 700.00, 0.00, 245.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(280, 'sobre de Efasol', '0.16', '', 340.00, 0.00, 119.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(282, 'tinte redken cover fusion', '0.16', '', 630.00, 0.00, 220.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
-	(283, 'tratamiento antigrasa rebalancing davines', '0.16', '', 600.00, 0.00, 210.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
+	(283, 'Balayage', '0.16', '', 600.00, 0.00, 210.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(284, 'tratamiento brazilian anti frizz fleco ', '0.16', 'Solo fleco corto de raiz a punta', 640.00, 0.00, 224.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(285, 'tratamiento brillo kerastase k-water', '0.16', '', 400.00, 0.00, 140.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(286, 'tratamiento loreal  vitamino color', '0.16', '', 460.00, 0.00, 161.00, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(287, 'tratamiento love davines', '0.16', '', 530.00, 0.00, 185.50, 30, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(288, 'tratamiento replumping davines', '0.16', '', 880.00, 0.00, 308.00, 60, 5, NULL, NULL, '0000-00-00 00:00:00'),
 	(349, 'Ampolleta doble', '0.16', NULL, 430.00, NULL, NULL, 30, 5, NULL, '2025-01-15 01:20:33', '2025-01-15 01:20:33'),
-	(350, 'Ampolleta sencilla', '0.16', NULL, 330.00, NULL, NULL, 30, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44');
+	(350, 'Ampolleta sencilla', '0.16', NULL, 330.00, NULL, NULL, 30, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44'),
+	(361, 'Maquillaje XV', '0.16', NULL, 2000.00, NULL, NULL, 90, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44'),
+	(362, 'Alaciado', '0.16', NULL, 650.00, NULL, NULL, 30, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44'),
+	(363, 'Base', '0.16', NULL, 550.00, NULL, NULL, 30, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44'),
+	(364, 'Rayos', '0.16', NULL, 650.00, NULL, NULL, 45, 5, NULL, '2025-01-15 02:13:44', '2025-01-15 02:13:44');
 
 
 -- Volcando datos para la tabla glowmanager.etiquetas_citas: ~4 rows (aproximadamente)
